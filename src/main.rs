@@ -4,7 +4,7 @@ use cli::*;
 use std::sync::Arc;
 
 fn main() {
-    let _config = Config::parse();
+    let config = Config::parse();
     let server_crypto_config = rustls::ServerConfig::builder()
         .with_safe_defaults()
         .with_no_client_auth()
@@ -13,7 +13,7 @@ fn main() {
             rustls::PrivateKey(vec![0]),
         )
         .unwrap();
-    let udp_socket = std::net::UdpSocket::bind("[::]:4420").unwrap();
+    let udp_socket = std::net::UdpSocket::bind(config.listen).unwrap();
     let server_config = quinn::ServerConfig::with_crypto(Arc::new(server_crypto_config));
     let rt = quinn::default_runtime().unwrap();
     let endpoint_config = quinn::EndpointConfig::default();
