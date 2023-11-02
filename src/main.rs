@@ -9,8 +9,8 @@ fn main() {
         .with_safe_defaults()
         .with_no_client_auth()
         .with_single_cert(
-            vec![rustls::Certificate(vec![0])],
-            rustls::PrivateKey(vec![0]),
+            vec![rustls::Certificate(vec![0])], // TODO: load real cert
+            rustls::PrivateKey(vec![0]),        // TODO: load real key
         )
         .unwrap();
     let udp_socket = std::net::UdpSocket::bind(config.listen).unwrap();
