@@ -1,6 +1,6 @@
 [package]
-name = "quicwt"
-description = "QUICWT (quick wit)"
+name = "wicket"
+description = "wicket (a QUIC/WT proxy)"
 authors = ["Mike English"]
 license = "MIT OR Apache-2.0"
 
