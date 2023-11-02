@@ -15,3 +15,6 @@ categories = ["network-programming", "web-programming"]
 [dependencies]
 clap = { version = "4", features = ["derive"] }
 url = "2.4.1"
+quinn = "0.10"
+webtransport-quinn = "0.6"
+rustls = "0.21.8"
