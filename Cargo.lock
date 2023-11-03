@@ -1276,6 +1276,7 @@ dependencies = [
  "clap",
  "quinn",
  "rustls",
+ "rustls-pemfile",
  "url",
  "webtransport-quinn",
 ]

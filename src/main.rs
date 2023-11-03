@@ -3,14 +3,21 @@ use clap::Parser;
 use cli::*;
 use std::sync::Arc;
 
+const CERT: &[u8] = include_bytes!("../dev/localhost.crt");
+const KEY: &[u8] = include_bytes!("../dev/localhost.key");
+
 fn main() {
     let config = Config::parse();
+
+    let cert = &rustls_pemfile::certs(&mut CERT.as_ref()).unwrap()[0];
+    let key = &rustls_pemfile::pkcs8_private_keys(&mut KEY.as_ref()).unwrap()[0];
+
     let server_crypto_config = rustls::ServerConfig::builder()
         .with_safe_defaults()
         .with_no_client_auth()
         .with_single_cert(
-            vec![rustls::Certificate(vec![0])], // TODO: load real cert
-            rustls::PrivateKey(vec![0]),        // TODO: load real key
+            vec![rustls::Certificate(cert.to_vec())], // TODO: load real cert
+            rustls::PrivateKey(key.to_vec()),         // TODO: load real key
         )
         .unwrap();
     let udp_socket = std::net::UdpSocket::bind(config.listen).unwrap();
