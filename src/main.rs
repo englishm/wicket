@@ -6,7 +6,8 @@ use std::sync::Arc;
 const CERT: &[u8] = include_bytes!("../dev/localhost.crt");
 const KEY: &[u8] = include_bytes!("../dev/localhost.key");
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let config = Config::parse();
 
     let cert = &rustls_pemfile::certs(&mut CERT.as_ref()).unwrap()[0];
